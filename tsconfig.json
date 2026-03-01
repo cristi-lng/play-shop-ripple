@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "jsxImportSource": "ripple",
+
+    "baseUrl": "./",
+    "paths": {
+      "~*": ["src/features/*"]
+    },
+
+    "plugins": [{ "name": "@ripple-ts/typescript-plugin" }]
+  }
+}
