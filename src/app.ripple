@@ -1,5 +1,11 @@
+import { CartProvider } from 'src/store/cartContext.ripple';
+import { RouterProvider } from 'src/router/routerProvider.ripple';
+import 'src/styles/global.css';
+
 component App() {
-  <h1>{'Hello!'}</h1>
+  <CartProvider>
+    <RouterProvider />
+  </CartProvider>
 }
 
 export { App };

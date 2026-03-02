@@ -1,12 +1,18 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 import { ripple } from '@ripple-ts/vite-plugin';
 
 export default defineConfig({
   root: 'src',
+  resolve: {
+    alias: [
+      { find: 'src', replacement: path.resolve('src') },
+      { find: /~(.*)/, replacement: path.join(path.resolve('src/features/'), '$1') },
+    ],
+  },
   publicDir: 'assets/public',
   envDir: process.cwd(),
-  plugins: [tsconfigPaths(), ripple()],
+  plugins: [ripple()],
   build: {
     outDir: `${process.cwd()}/dist`,
     emptyOutDir: true,

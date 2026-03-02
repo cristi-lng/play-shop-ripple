@@ -1,0 +1,15 @@
+@import url('./reset.css');
+
+:root {
+  --color-text-base: #222222;
+  --color-text-light: #888888;
+  --color-border-base: #e1e1e1;
+  --color-framework: #3e95ff;
+  --color-error: #b61212;
+}
+
+body {
+  font-family: Quicksand;
+  color: var(--color-text-base);
+  -webkit-font-smoothing: antialiased;
+}

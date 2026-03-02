@@ -1,0 +1,24 @@
+import { ErrorIcon } from 'src/components/errorIcon.ripple';
+
+component ErrorBoundary() {
+  <div class="errorBoundary">
+    <ErrorIcon class={#style.errorBoundary_icon} />
+    <span>{'An error occurred. Please try again.'}</span>
+  </div>
+
+  <style>
+    .errorBoundary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 500;
+      color: var(--color-error);
+    }
+
+    .errorBoundary_icon {
+      width: 8rem;
+    }
+  </style>
+}
+
+export { ErrorBoundary };

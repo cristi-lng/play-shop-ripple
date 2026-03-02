@@ -1,0 +1,41 @@
+import { type Tracked, type Component, Context, track } from 'ripple';
+
+import type { CartItem } from 'src/types/cartItem';
+import type { ProductSummary } from 'src/types/productSummary';
+import type { ProductDetails } from 'src/types/productDetails';
+
+type CartContextValue = {
+  items: CartItem[];
+  totalPrice: Tracked<number>;
+  addProduct: (productToAdd: ProductSummary | ProductDetails) => void;
+};
+
+const cartContext = new Context<CartContextValue>();
+
+component CartProvider({ children }: { children: Component }) {
+  let items = #[] as CartItem[];
+
+  let totalPrice = track(
+    () => parseFloat(items.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2)),
+  );
+
+  function addProduct(productToAdd: ProductSummary | ProductDetails) {
+    const exists = items.find((item) => item.product.id == productToAdd.id);
+
+    if (exists) {
+      exists.quantity++;
+    } else {
+      items.push({ product: productToAdd, quantity: 1 });
+    }
+  }
+
+  cartContext.set({ items, totalPrice, addProduct });
+
+  <children />
+}
+
+function getCartContext() {
+  return cartContext.get();
+}
+
+export { CartProvider, getCartContext };

@@ -1,0 +1,89 @@
+import type { Component } from 'ripple';
+import { Link } from 'src/router/ripple-router';
+
+import { getCategories } from '~layout/api/getCategories';
+import { CartPopup } from '~layout/components/layout/cartPopup.ripple';
+
+component Layout({ children }: { children: Component }) {
+  <div class="layout">
+    <div class="layout_header">
+      <Link href="/" class={#style.layout_logo}>
+        <span>{'Play.'}</span>
+        <span>{'Shop'}</span>
+      </Link>
+
+      const categories = await getCategories();
+      const searchParams = new URLSearchParams(window.location.search);
+
+      <ul class="layout_categories">
+        for (const category of categories) {
+          <li>
+            <Link
+              href={`/?category=${category.name}`}
+              class={[
+                #style.layout_category,
+                { [#style.layout_activeCategory]: category.name === searchParams.get('category') },
+              ]}
+            >
+              {category.name}
+            </Link>
+          </li>
+        }
+      </ul>
+
+      <CartPopup />
+    </div>
+
+    <children />
+  </div>
+
+  <style>
+    .layout {
+      display: flex;
+      flex-direction: column;
+      max-width: 90rem;
+      margin: 0 auto;
+    }
+
+    .layout_header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--color-border-base);
+    }
+
+    .layout_logo {
+      font-size: 2.5rem;
+      color: var(--color-text-base);
+    }
+
+    .layout_logo span:first-child {
+      font-weight: 800;
+    }
+
+    .layout_categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 0;
+      margin: 0;
+      margin-right: auto;
+      list-style: none;
+    }
+
+    .layout_category {
+      font-size: 1.25rem;
+      text-transform: capitalize;
+      color: var(--color-text-base);
+    }
+
+    :global(.layout_category:hover),
+    .layout_activeCategory {
+      font-weight: 800;
+    }
+  </style>
+}
+
+export { Layout };

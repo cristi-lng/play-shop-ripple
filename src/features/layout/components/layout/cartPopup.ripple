@@ -1,0 +1,115 @@
+import { track } from 'ripple';
+
+import { getCartContext } from 'src/store/cartContext.ripple';
+import { CartIcon } from 'src/components/cartIcon.ripple';
+
+component CartPopup() {
+  const cartContextValue = getCartContext();
+  let itemsCount = track(() => cartContextValue.items.length);
+  let open = track(false);
+
+  <div class="cartPopup">
+    <button class="cartPopup_trigger" disabled={@itemsCount === 0} onClick={() => (@open = !@open)}>
+      <CartIcon />
+      if (@itemsCount > 0) {
+        <span class="cartPopup_itemsCount">{@itemsCount}</span>
+      }
+    </button>
+
+    if (@open) {
+      <div class="cartPopup_panel">
+        for (const item of cartContextValue.items) {
+          <div>
+            <span>{item.product.name}</span>
+            <span class="cartPopup_itemQuantity">
+              {'x'}
+              {item.quantity}
+            </span>
+            <span class="cartPopup_itemPrice">
+              {'$'}
+              {item.product.price}
+            </span>
+          </div>
+        }
+        <div class="cartPopup_totalContainer">
+          <span>{'Total'}</span>
+          <span class="cartPopup_totalPrice">
+            {'$'}
+            {cartContextValue.@totalPrice}
+          </span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <style>
+    .cartPopup {
+      position: relative;
+    }
+
+    .cartPopup_trigger {
+      position: relative;
+      padding: 0.5rem;
+      border: none;
+      background: none;
+    }
+
+    .cartPopup_itemsCount {
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 0.75em;
+      font-weight: 500;
+      border-radius: 50%;
+      color: white;
+      background-color: var(--color-text-base);
+    }
+
+    .cartPopup_panel {
+      position: absolute;
+      right: 1rem;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 1rem;
+      width: 20rem;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-base);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+      background-color: white;
+    }
+
+    .cartPopup_panel > div {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+    }
+
+    .cartPopup_itemQuantity {
+      place-self: center;
+      color: var(--color-text-light);
+    }
+
+    .cartPopup_itemPrice {
+      place-self: center end;
+    }
+
+    .cartPopup_totalContainer {
+      padding-top: 1rem;
+      font-weight: 800;
+      border-top: 1px solid var(--color-border-base);
+    }
+
+    .cartPopup_totalPrice {
+      grid-column: 2 / 4;
+      place-self: center end;
+    }
+  </style>
+}
+
+export { CartPopup };

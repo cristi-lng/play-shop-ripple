@@ -1,0 +1,20 @@
+import { Router, Route } from 'src/router/ripple-router';
+
+import { Root } from 'src/components/root.ripple';
+import { Layout } from '~layout';
+
+component Dummy() {
+  <Root>
+    <Layout>
+      <h1>{'Hello'}</h1>
+    </Layout>
+  </Root>
+}
+
+component RouterProvider() {
+  <Router>
+    <Route path="/" element={Dummy} />
+  </Router>
+}
+
+export { RouterProvider };

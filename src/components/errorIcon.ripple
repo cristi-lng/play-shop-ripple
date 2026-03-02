@@ -1,0 +1,31 @@
+component ErrorIcon({ class: _class }: { class?: string }) {
+  <span class={['errorIcon', _class]}>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g id="SVGRepo_bgCarrier" stroke-width="0" />
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+      <g id="SVGRepo_iconCarrier">
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="#000000"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+        <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v5m0 3v0" />
+      </g>
+    </svg>
+  </span>
+
+  <style>
+    .errorIcon {
+      circle,
+      path {
+        stroke: var(--color-error);
+      }
+    }
+  </style>
+}
+
+export { ErrorIcon };

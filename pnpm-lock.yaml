@@ -14,9 +14,6 @@ importers:
       ripple:
         specifier: latest
         version: 0.2.216
-      ripple-router:
-        specifier: ^1.0.1
-        version: 1.0.1(ripple@0.2.216)
     devDependencies:
       '@ripple-ts/eslint-parser':
         specifier: latest
@@ -51,9 +48,6 @@ importers:
       vite:
         specifier: ^7.1.4
         version: 7.3.1(@types/node@25.3.3)
-      vite-tsconfig-paths:
-        specifier: ^6.1.1
-        version: 6.1.1(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3))
       wrangler:
         specifier: ^4.69.0
         version: 4.69.0
@@ -960,9 +954,6 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globrex@0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
@@ -1145,12 +1136,6 @@ packages:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
 
-  ripple-router@1.0.1:
-    resolution: {integrity: sha512-5t5ZulF90CsK4nP/DCjUGLH7DY8+LEzxZJsIqhrQ6zWi/DwFUCgdBB1QSCtO3ihM2A+f3Doj9VVOH6EQbTvxQQ==}
-    engines: {node: '>=20.0.0'}
-    peerDependencies:
-      ripple: 0.2.188
-
   ripple@0.2.216:
     resolution: {integrity: sha512-vk1nxGnVyt4TGSGLn0ynUT8yWRCZGwItmODTXU/r/LCbrq0iU2oJyWzirFET3E4c8Ty/P48A+6nl3hiqcX9gXw==}
 
@@ -1202,16 +1187,6 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  tsconfck@3.1.6:
-    resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -1236,11 +1211,6 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
-
-  vite-tsconfig-paths@6.1.1:
-    resolution: {integrity: sha512-2cihq7zliibCCZ8P9cKJrQBkfgdvcFkOOc3Y02o3GWUDLgqjWsZudaoiuOwO/gzTzy17cS5F7ZPo4bsnS4DGkg==}
-    peerDependencies:
-      vite: '*'
 
   vite@7.3.1:
     resolution: {integrity: sha512-w+N7Hifpc3gRjZ63vYBXA56dvvRlNWRczTdmCBBa+CotUzAPf5b7YMdMR/8CQoeYE5LX3W4wj6RYTgonm1b9DA==}
@@ -2087,8 +2057,6 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globrex@0.1.2: {}
-
   gopd@1.2.0: {}
 
   has-flag@4.0.0: {}
@@ -2242,10 +2210,6 @@ snapshots:
 
   resolve-from@4.0.0: {}
 
-  ripple-router@1.0.1(ripple@0.2.216):
-    dependencies:
-      ripple: 0.2.216
-
   ripple@0.2.216:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -2349,10 +2313,6 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
-  tsconfck@3.1.6(typescript@5.9.3):
-    optionalDependencies:
-      typescript: 5.9.3
-
   tslib@2.8.1:
     optional: true
 
@@ -2373,16 +2333,6 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
-
-  vite-tsconfig-paths@6.1.1(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)):
-    dependencies:
-      debug: 4.4.3
-      globrex: 0.1.2
-      tsconfck: 3.1.6(typescript@5.9.3)
-      vite: 7.3.1(@types/node@25.3.3)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   vite@7.3.1(@types/node@25.3.3):
     dependencies:

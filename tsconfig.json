@@ -12,6 +12,8 @@
     "jsx": "preserve",
     "jsxImportSource": "ripple",
 
+    "types": ["vite/client"],
+
     "baseUrl": "./",
     "paths": {
       "~*": ["src/features/*"]

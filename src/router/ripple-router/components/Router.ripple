@@ -1,0 +1,13 @@
+import { Renderer } from './Renderer.ripple';
+
+/**
+ * Router component.
+ *
+ * @param props - The router props.
+ * @param props.children - The router children.
+ * @returns The router component.
+ */
+export component Router(props) {
+  <props.children />
+  <Renderer />
+}

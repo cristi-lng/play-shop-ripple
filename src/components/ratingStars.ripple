@@ -1,0 +1,23 @@
+component RatingStars({ ratingValue }: { ratingValue: number }) {
+  <div class="ratingStars" style={{ '--rating-value': ratingValue }} />
+
+  <style>
+    .ratingStars {
+      display: inline-block;
+      font-size: 1.25rem;
+      background: linear-gradient(
+        to right,
+        var(--color-framework) calc(var(--rating-value) / 5 * 100%),
+        var(--color-border-base) calc(var(--rating-value) / 5 * 100%)
+      );
+      background-clip: text;
+      color: transparent;
+    }
+
+    .ratingStars::before {
+      content: '★★★★★';
+    }
+  </style>
+}
+
+export { RatingStars };

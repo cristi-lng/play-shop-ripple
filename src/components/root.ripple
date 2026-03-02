@@ -1,0 +1,16 @@
+import type { Component } from 'ripple';
+
+import { Loading } from 'src/components/loading.ripple';
+import { ErrorBoundary } from 'src/components/errorBoundary.ripple';
+
+component Root({ children }: { children: Component }) {
+  try {
+    <children />
+  } pending {
+    <Loading />
+  } catch {
+    <ErrorBoundary />
+  }
+}
+
+export { Root };
