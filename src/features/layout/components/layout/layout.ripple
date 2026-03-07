@@ -1,5 +1,5 @@
 import type { Component } from 'ripple';
-import { Link } from 'src/router/ripple-router';
+import { Link } from 'ripple-router';
 
 import { getCategories } from '~layout/api/getCategories';
 import { CartPopup } from '~layout/components/layout/cartPopup.ripple';

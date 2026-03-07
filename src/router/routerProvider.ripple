@@ -1,4 +1,4 @@
-import { Router, Route } from 'src/router/ripple-router';
+import { Router, Route } from 'ripple-router';
 
 import { ProductsPage, ProductDescriptionPage } from 'src/router/routes.ripple';
 

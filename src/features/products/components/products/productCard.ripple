@@ -1,4 +1,4 @@
-import { Link } from 'src/router/ripple-router';
+import { Link } from 'ripple-router';
 
 import type { ProductSummary } from 'src/types/productSummary';
 import { RatingStars } from 'src/components/ratingStars.ripple';

@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: 'src', replacement: path.resolve('src') },
+      { find: 'ripple-router', replacement: path.resolve('ripple-router') },
       { find: /~(.*)/, replacement: path.join(path.resolve('src/features/'), '$1') },
     ],
   },

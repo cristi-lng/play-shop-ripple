@@ -1,5 +1,5 @@
 import { track } from 'ripple';
-import { Link } from 'src/router/ripple-router';
+import { Link } from 'ripple-router';
 
 import type { GetProductsParams } from '~products/types/getProductsParams';
 import { buildNextPageUrl } from '~products/services/buildNextPageUrl';
