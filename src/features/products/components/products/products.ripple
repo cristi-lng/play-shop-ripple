@@ -1,0 +1,32 @@
+import { buildProductsParams } from '~products/services/buildProductsParams';
+import { getProducts } from '~products/api/getProducts';
+import { ProductsToolbar } from '~products/components/products/productsToolbar.ripple';
+import { ProductCard } from '~products/components/products/productCard.ripple';
+
+component Products() {
+  const productsParams = #{ ...buildProductsParams() };
+  const productsResponse = await getProducts(productsParams);
+
+  <ProductsToolbar {productsParams} productsTotal={productsResponse.total} />
+
+  <div class="products_list">
+    if (productsResponse.products.length) {
+      for (const product of productsResponse.products) {
+        <ProductCard {product} />
+      }
+    } else {
+      {'No products!'}
+    }
+  </div>
+
+  <style>
+    .products_list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+  </style>
+}
+
+export { Products };

@@ -59,7 +59,7 @@ component Layout({ children }: { children: Component }) {
       color: var(--color-text-base);
     }
 
-    .layout_logo span:first-child {
+    :global(.layout_logo span:first-child) {
       font-weight: 800;
     }
 

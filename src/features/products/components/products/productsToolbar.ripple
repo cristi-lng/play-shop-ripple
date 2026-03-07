@@ -1,0 +1,71 @@
+import { track } from 'ripple';
+import { Link } from 'src/router/ripple-router';
+
+import type { GetProductsParams } from '~products/types/getProductsParams';
+import { buildNextPageUrl } from '~products/services/buildNextPageUrl';
+import { PageToolbar } from 'src/components/pageToolbar.ripple';
+
+component ProductsToolbar({
+  productsParams,
+  productsTotal,
+}: {
+  productsParams: GetProductsParams;
+  productsTotal: number;
+}) {
+  let currentPage = track(() => productsParams.page);
+  let lastPage = track(() => Math.ceil(productsTotal / productsParams.pageSize));
+
+  <PageToolbar>
+    <div class={[#style.productsToolbar_pagination]}>
+      <Link
+        href={buildNextPageUrl({ requestedPage: @currentPage - 1, lastPage: @lastPage, productsParams })}
+        class={[#style.productsToolbar_link, { [#style.productsToolbar_disabledLink]: @currentPage === 1 }]}
+      >
+        {'<'}
+      </Link>
+      <span
+        class={[#style.productsToolbar_link, #style.productsToolbar_currentLink, #style.productsToolbar_disabledLink]}
+      >
+        {@currentPage}
+      </span>
+      <Link
+        href={buildNextPageUrl({ requestedPage: @currentPage + 1, lastPage: @lastPage, productsParams })}
+        class={[#style.productsToolbar_link, { [#style.productsToolbar_disabledLink]: @currentPage === @lastPage }]}
+      >
+        {'>'}
+      </Link>
+    </div>
+  </PageToolbar>
+
+  <style>
+    .productsToolbar_pagination {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .productsToolbar_link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-base);
+      color: var(--color-text-base);
+    }
+
+    .productsToolbar_disabledLink {
+      cursor: not-allowed;
+      color: var(--color-text-light);
+      background-color: var(--color-border-base);
+    }
+
+    .productsToolbar_currentLink,
+    .productsToolbar_link:hover:not(.productsToolbar_disabledLink) {
+      color: white;
+      background-color: var(--color-text-base);
+    }
+  </style>
+}
+
+export { ProductsToolbar };

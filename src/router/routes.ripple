@@ -1,0 +1,19 @@
+import { Root } from 'src/components/root.ripple';
+import { Layout } from '~layout';
+import { Products } from '~products';
+
+component ProductsPage() {
+  <Root>
+    <Layout>
+      <Products />
+    </Layout>
+  </Root>
+}
+
+component ProductDescriptionPage() {
+  <Root>
+    <Layout>{'Empty'}</Layout>
+  </Root>
+}
+
+export { ProductsPage, ProductDescriptionPage };
