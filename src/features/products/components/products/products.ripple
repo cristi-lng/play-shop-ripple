@@ -1,17 +1,20 @@
+import { type Tracked, track } from 'ripple';
+
 import { buildProductsParams } from '~products/services/buildProductsParams';
 import { getProducts } from '~products/api/getProducts';
+import type { GetProductsResponse } from '~products/types/getProductsResponse';
 import { ProductsToolbar } from '~products/components/products/productsToolbar.ripple';
 import { ProductCard } from '~products/components/products/productCard.ripple';
 
-component Products() {
-  const productsParams = #{ ...buildProductsParams() };
-  const productsResponse = await getProducts(productsParams);
+component Products({ searchParams }: { searchParams: Tracked<Record<string, string>> }) {
+  const productsParams = track(() => buildProductsParams(@searchParams));
+  const productsResponse = await track(() => getProducts(@productsParams)) as unknown as Tracked<GetProductsResponse>;
 
-  <ProductsToolbar {productsParams} productsTotal={productsResponse.total} />
+  <ProductsToolbar {@productsParams} productsTotal={@productsResponse.total} />
 
   <div class="products_list">
-    if (productsResponse.products.length) {
-      for (const product of productsResponse.products) {
+    if (@productsResponse.products.length) {
+      for (const product of @productsResponse.products) {
         <ProductCard {product} />
       }
     } else {

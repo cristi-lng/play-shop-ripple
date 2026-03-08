@@ -1,13 +1,10 @@
-import { Renderer } from './Renderer.ripple';
+import type { RouterProps } from 'ripple-router/types';
 
-/**
- * Router component.
- *
- * @param props - The router props.
- * @param props.children - The router children.
- * @returns The router component.
- */
-export component Router(props) {
-  <props.children />
+import { RoutesContext } from 'ripple-router/contexts/RoutesContext.ripple';
+import { Renderer } from 'ripple-router/components/Renderer.ripple';
+
+export component Router(props: RouterProps) {
+  RoutesContext.set(props.routes);
+
   <Renderer />
 }

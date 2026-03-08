@@ -7,7 +7,7 @@ type BuildNextPageUrlArgs = {
 };
 
 function buildNextPageUrl({ requestedPage, lastPage, productsParams }: BuildNextPageUrlArgs) {
-  if (requestedPage < 1 || requestedPage > lastPage) return '#';
+  if (requestedPage < 1 || requestedPage > lastPage) return '';
 
   const nextPageParams = { ...productsParams, page: requestedPage };
   return `/?${new URLSearchParams(

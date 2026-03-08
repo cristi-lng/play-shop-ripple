@@ -8,22 +8,22 @@ import { PathFragment } from '../types/internal';
  * @returns {boolean} True if the paths match, false otherwise.
  */
 export function matchPath(path1: PathFragment[], path2: PathFragment[]): boolean {
-	if (path1.length !== path2.length) {
-		return false;
-	}
+  if (path1.length !== path2.length) {
+    return false;
+  }
 
-	for (let i = 0; i < path1.length; i++) {
-		const fragment1 = path1[i];
-		const fragment2 = path2[i];
+  for (let i = 0; i < path1.length; i++) {
+    const fragment1 = path1[i];
+    const fragment2 = path2[i];
 
-		if (fragment1.isDynamic) {
-			continue;
-		}
+    if (fragment1.isDynamic && fragment2.name) {
+      continue;
+    }
 
-		if (fragment1.name !== fragment2.name) {
-			return false;
-		}
-	}
+    if (fragment1.name !== fragment2.name) {
+      return false;
+    }
+  }
 
-	return true;
+  return true;
 }

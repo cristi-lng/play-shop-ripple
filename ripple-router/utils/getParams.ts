@@ -8,16 +8,16 @@ import type { PathFragment } from '../types/internal';
  * @returns The route params.
  */
 export function getParams(routeFragments: PathFragment[], locationFragments: PathFragment[]) {
-	const params: Record<string, string> = {};
+  const params: Record<string, string> = {};
 
-	for (let i = 0; i < routeFragments.length; i++) {
-		const routePathFragment = routeFragments[i];
-		const locationFragment = locationFragments[i];
+  for (let i = 0; i < routeFragments.length; i++) {
+    const routePathFragment = routeFragments[i];
+    const locationFragment = locationFragments[i];
 
-		// If the route path fragment is dynamic, add it to the params.
-		if (routePathFragment.isDynamic && locationFragment) {
-			params[routePathFragment.name] = locationFragment.name;
-		}
-	}
-	return params;
+    // If the route path fragment is dynamic, add it to the params.
+    if (routePathFragment.isDynamic && locationFragment) {
+      params[routePathFragment.name] = locationFragment.name;
+    }
+  }
+  return params;
 }

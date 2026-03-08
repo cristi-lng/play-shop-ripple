@@ -1,10 +1,10 @@
-import type { Component } from 'ripple';
+import { type Tracked, type Component, track } from 'ripple';
 import { Link } from 'ripple-router';
 
 import { getCategories } from '~layout/api/getCategories';
 import { CartPopup } from '~layout/components/layout/cartPopup.ripple';
 
-component Layout({ children }: { children: Component }) {
+component Layout({ searchParams, children }: { searchParams: Tracked<Record<string, string>>; children: Component }) {
   <div class="layout">
     <div class="layout_header">
       <Link href="/" class={#style.layout_logo}>
@@ -13,7 +13,7 @@ component Layout({ children }: { children: Component }) {
       </Link>
 
       const categories = await getCategories();
-      const searchParams = new URLSearchParams(window.location.search);
+      let currentCategory = track(() => @searchParams.category);
 
       <ul class="layout_categories">
         for (const category of categories) {
@@ -22,7 +22,7 @@ component Layout({ children }: { children: Component }) {
               href={`/?category=${category.name}`}
               class={[
                 #style.layout_category,
-                { [#style.layout_activeCategory]: category.name === searchParams.get('category') },
+                { [#style.layout_activeCategory]: category.name === @currentCategory },
               ]}
             >
               {category.name}

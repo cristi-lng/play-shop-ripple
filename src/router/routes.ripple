@@ -1,18 +1,20 @@
+import type { RouteProps } from 'ripple-router';
+
 import { Root } from 'src/components/root.ripple';
 import { Layout } from '~layout';
 import { Products } from '~products';
 
-component ProductsPage() {
+component ProductsPage({ searchParams }: RouteProps) {
   <Root>
-    <Layout>
-      <Products />
+    <Layout {searchParams}>
+      <Products {searchParams} />
     </Layout>
   </Root>
 }
 
-component ProductDescriptionPage() {
+component ProductDescriptionPage({ searchParams }: RouteProps) {
   <Root>
-    <Layout>{'Empty'}</Layout>
+    <Layout {searchParams}>{'Empty'}</Layout>
   </Root>
 }
 

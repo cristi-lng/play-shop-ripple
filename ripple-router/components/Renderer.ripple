@@ -1,24 +1,27 @@
-import { effect, track } from 'ripple';
+import { effect, track, type Component } from 'ripple';
 import { NotFound } from './NotFound.ripple';
 import { RoutesContext } from '../contexts/RoutesContext.ripple';
 import { formatPath } from '../utils/formatPath';
 import { matchPath } from '../utils/matchPath';
 import { getParams } from '../utils/getParams';
+import { getSearchParams } from '../utils/getSearchParams';
 import { SYMBOLS } from '../constants';
 
 export component Renderer() {
   const routes = RoutesContext.get();
-  let routeMatched = track(() => false);
+  let matched = track<string | undefined>();
 
-  // Get location pathname
   let path = track(() => window.location.pathname);
-  let locationPathFragments = track(() => formatPath(@path));
-  let element = track(null);
-  let params = track(null);
+  let pathFragments = track(() => formatPath(@path));
+  let pathParams = track({});
+
+  let search = track(() => window.location.search);
+  let searchParams = track({});
 
   effect(() => {
     function listenToNavigation() {
       @path = window.location.pathname;
+      @search = window.location.search;
     }
 
     window.addEventListener('popstate', listenToNavigation);
@@ -26,26 +29,29 @@ export component Renderer() {
   });
 
   effect(() => {
-    for (const route of routes.keys()) {
-      const routePathFragments = formatPath(route);
+    @matched = undefined;
+    for (const route of routes) {
+      const candidatePathFragments = formatPath(route.path);
 
-      if (matchPath(routePathFragments, @locationPathFragments)) {
-        @routeMatched = true;
-        @element = routes.get(route);
-        @params = getParams(routePathFragments, @locationPathFragments);
+      if (matchPath(candidatePathFragments, @pathFragments)) {
+        @matched = route.path;
+        @pathParams = getParams(candidatePathFragments, @pathFragments);
+        @searchParams = getSearchParams(@search);
       }
     }
   });
 
-  if (@routeMatched) {
-    <@element {@params} />
+  for (const route of routes) {
+    if (@matched === route.path) {
+      <route.element {@pathParams} {@searchParams} />
+    }
   }
 
-  if (!@routeMatched) {
-    const CustomNotFound = routes.get(SYMBOLS.CATCH_ALL);
+  if (!matched) {
+    const catchAllRoute = routes.find((route) => route.path === SYMBOLS.CATCH_ALL);
 
-    if (CustomNotFound) {
-      <CustomNotFound />
+    if (catchAllRoute) {
+      <catchAllRoute.element />
     } else {
       <NotFound />
     }

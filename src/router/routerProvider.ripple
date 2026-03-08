@@ -1,12 +1,14 @@
-import { Router, Route } from 'ripple-router';
+import { Router } from 'ripple-router';
 
 import { ProductsPage, ProductDescriptionPage } from 'src/router/routes.ripple';
 
 component RouterProvider() {
-  <Router>
-    <Route path="/:productId" element={ProductDescriptionPage} />
-    <Route path="/" element={ProductsPage} />
-  </Router>
+  <Router
+    routes={[
+      { path: '/', element: ProductsPage },
+      { path: '/:productId', element: ProductDescriptionPage },
+    ]}
+  />
 }
 
 export { RouterProvider };
