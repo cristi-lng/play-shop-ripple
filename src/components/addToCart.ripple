@@ -11,7 +11,7 @@ component AddToCart({ product }: { product: ProductSummary | ProductDetails }) {
     cartContextValue.addProduct(product);
   }
 
-  <button class="addToCart" type="button" onClick={handleAdd}>{'Add to cart'}</button>
+  <button class="addToCart" type="button" onClick={{ handleEvent: handleAdd, capture: true }}>{'Add to cart'}</button>
 
   <style>
     .addToCart {

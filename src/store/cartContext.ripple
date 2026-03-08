@@ -25,7 +25,7 @@ component CartProvider({ children }: { children: Component }) {
     if (exists) {
       exists.quantity++;
     } else {
-      items.push({ product: productToAdd, quantity: 1 });
+      items.push(#{ product: productToAdd, quantity: 1 });
     }
   }
 
