@@ -1,13 +1,13 @@
-import { type Tracked, type Component, track } from 'ripple';
+import { type Tracked, track } from 'ripple';
 
 import { getProduct } from '~product/api/getProduct';
 import type { ProductDetails } from 'src/types/productDetails';
 import { Product } from '~product/components/product/product.ripple';
 
-component ProductDescription({ productId }: { productId: Tracked<string> }) {
-  const product = await track(() => getProduct(Number(@productId))) as unknown as Tracked<ProductDetails>;
+component ProductDescription({ productId }: { productId: string }) {
+  const product = await track(() => getProduct(Number(productId))) as unknown as Tracked<ProductDetails>;
 
-  <Product {product}>{@product.description}</Product>
+  <Product {@product}>{@product.description}</Product>
 }
 
 export { ProductDescription };

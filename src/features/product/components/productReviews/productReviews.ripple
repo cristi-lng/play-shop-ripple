@@ -7,12 +7,12 @@ import type { Review } from '~product/types/review';
 import { Product } from '~product/components/product/product.ripple';
 import { RatingStars } from 'src/components/ratingStars.ripple';
 
-component ProductReviews({ productId }: { productId: Tracked<string> }) {
-  const product = await track(() => getProduct(Number(@productId))) as unknown as Tracked<ProductDetails>;
-  const reviews = await track(() => getReviews(Number(@productId))) as unknown as Tracked<Review[]>;
+component ProductReviews({ productId }: { productId: string }) {
+  const product = await track(() => getProduct(Number(productId))) as unknown as Tracked<ProductDetails>;
+  const reviews = await track(() => getReviews(Number(productId))) as unknown as Tracked<Review[]>;
   const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'long' });
 
-  <Product {product}>
+  <Product {@product}>
     <div class={[#style.productReviews]}>
       for (const review of @reviews) {
         <div class={[#style.productReviews_review]}>

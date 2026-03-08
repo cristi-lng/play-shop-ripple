@@ -16,15 +16,15 @@ component ProductsPage({ searchParams }: RouteProps) {
 component ProductDescriptionPage({ searchParams, pathParams }: RouteProps<'/:productId'>) {
   <Root>
     <Layout {searchParams}>
-      <ProductDescription productId={@pathParams.@productId} />
+      <ProductDescription productId={pathParams.productId} />
     </Layout>
   </Root>
 }
 
-component ProductReviewsPage({ searchParams, pathParams }: RouteProps<'/:productId'>) {
+component ProductReviewsPage({ searchParams, pathParams }: RouteProps<'/:productId/reviews'>) {
   <Root>
     <Layout {searchParams}>
-      <ProductReviews productId={@pathParams.@productId} />
+      <ProductReviews productId={pathParams.productId} />
     </Layout>
   </Root>
 }

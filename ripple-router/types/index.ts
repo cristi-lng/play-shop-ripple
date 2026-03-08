@@ -1,4 +1,4 @@
-import type { Component, Tracked } from 'ripple';
+import type { Component } from 'ripple';
 import { ExtractPathParams } from 'ripple-router/types/route';
 
 export type RouteConfig = {
@@ -11,8 +11,8 @@ export type RouterProps = {
 };
 
 export type RouteProps<T extends string = string> = {
-  pathParams: Tracked<ExtractPathParams<T>>;
-  searchParams: Tracked<Record<string, string>>;
+  pathParams: ExtractPathParams<T>;
+  searchParams: Record<string, string>;
 };
 
 export declare function Router(props: RouterProps): void;
