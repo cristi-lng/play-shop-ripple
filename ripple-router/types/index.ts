@@ -11,7 +11,7 @@ export type RouterProps = {
 };
 
 export type RouteProps<T extends string = string> = {
-  params: Tracked<ExtractPathParams<T>>;
+  pathParams: Tracked<ExtractPathParams<T>>;
   searchParams: Tracked<Record<string, string>>;
 };
 

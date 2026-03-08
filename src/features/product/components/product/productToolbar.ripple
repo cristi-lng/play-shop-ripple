@@ -1,0 +1,23 @@
+import { PageToolbar } from 'src/components/pageToolbar.ripple';
+
+component ProductToolbar() {
+  <PageToolbar>
+    <button class={[#style.productToolbar_back]} onClick={() => history.back()}>{'< Back'}</button>
+  </PageToolbar>
+
+  <style>
+    .productToolbar_back {
+      padding: 0 1.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-base);
+      background-color: transparent;
+    }
+
+    .productToolbar_back:hover {
+      color: white;
+      background-color: var(--color-text-base);
+    }
+  </style>
+}
+
+export { ProductToolbar };

@@ -1,0 +1,142 @@
+import { type Tracked, type Component } from 'ripple';
+import { Link } from 'ripple-router';
+
+import type { ProductDetails } from 'src/types/productDetails';
+import { ProductToolbar } from '~product/components/product/productToolbar.ripple';
+import { RatingStars } from 'src/components/ratingStars.ripple';
+import { AddToCart } from 'src/components/addToCart.ripple';
+
+component Product({ product, children }: { product: Tracked<ProductDetails>; children: Component }) {
+  <ProductToolbar />
+
+  <div class="product">
+    <div class="product_imageContainer">
+      <img src={@product.image} alt={@product.name} />
+    </div>
+
+    <div class="product_infoContainer">
+      <div class="product_summaryInfo">
+        <div class="product_brand">{@product.brand}</div>
+        <div class="product_name">{@product.name}</div>
+        <div class="product_ratingContainer">
+          <RatingStars ratingValue={Number(@product.averageRating)} />
+          <span>{`(${@product.reviewCount} reviews)`}</span>
+        </div>
+      </div>
+
+      <div class="product_sellInfo">
+        <div class="product_price">
+          {'$'}
+          {@product.price}
+        </div>
+        <div class="product_stock">{@product.availabilityStatus}</div>
+        <div>{@product.warrantyInformation}</div>
+        <div>{@product.shippingInformation}</div>
+      </div>
+
+      <AddToCart {@product} />
+
+      <div class="product_navigation">
+        <Link
+          href={`/${@product.id}`}
+          class={[#style.product_link, { [#style.product_activeLink]: window.location.pathname === `/${@product.id}` }]}
+        >
+          {'Details'}
+        </Link>
+        <Link
+          href={`/${@product.id}/reviews`}
+          class={[
+            #style.product_link,
+            { [#style.product_activeLink]: window.location.pathname === `/${@product.id}/reviews` },
+          ]}
+        >
+          {'Reviews'}
+        </Link>
+      </div>
+
+      <children />
+    </div>
+  </div>
+
+  <style>
+    .product {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+    .product_imageContainer {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex: 1 1 20rem;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-base);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .product_infoContainer {
+      flex: 2 1 20rem;
+    }
+
+    .product_summaryInfo {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-border-base);
+    }
+
+    .product_brand {
+      color: var(--color-text-light);
+    }
+
+    .product_name {
+      font-size: 1.5rem;
+      color: var(--color-text-base);
+    }
+
+    .product_ratingContainer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      color: var(--color-text-light);
+    }
+
+    .product_sellInfo {
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--color-text-light);
+    }
+
+    .product_price {
+      font-size: 1.5rem;
+      color: var(--color-text-base);
+    }
+
+    .product_stock {
+      color: var(--color-text-base);
+    }
+
+    .product_navigation {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0 1rem 0;
+      border-bottom: 1px solid var(--color-border-base);
+    }
+
+    .product_link {
+      padding: 0.5rem 0;
+      color: var(--color-text-base);
+    }
+
+    .product_activeLink {
+      font-weight: 800;
+      border-bottom: 2px solid var(--color-text-base);
+    }
+  </style>
+}
+
+export { Product };

@@ -1,0 +1,56 @@
+import { type Tracked, track } from 'ripple';
+
+import { getProduct } from '~product/api/getProduct';
+import { getReviews } from '~product/api/getReviews';
+import type { ProductDetails } from 'src/types/productDetails';
+import type { Review } from '~product/types/review';
+import { Product } from '~product/components/product/product.ripple';
+import { RatingStars } from 'src/components/ratingStars.ripple';
+
+component ProductReviews({ productId }: { productId: Tracked<string> }) {
+  const product = await track(() => getProduct(Number(@productId))) as unknown as Tracked<ProductDetails>;
+  const reviews = await track(() => getReviews(Number(@productId))) as unknown as Tracked<Review[]>;
+  const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'long' });
+
+  <Product {product}>
+    <div class={[#style.productReviews]}>
+      for (const review of @reviews) {
+        <div class={[#style.productReviews_review]}>
+          <div class={[#style.productReviews_reviewHeader]}>
+            <span>{review.reviewerName}</span>
+            <span class={[#style.productReviews_reviewDate]}>{dateFormatter.format(new Date(review.date))}</span>
+          </div>
+          <RatingStars ratingValue={review.rating} />
+          <div>{review.comment}</div>
+        </div>
+      }
+    </div>
+  </Product>
+
+  <style>
+    .productReviews {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .productReviews_review {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .productReviews_reviewHeader {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .productReviews_reviewDate {
+      margin-right: 1rem;
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+  </style>
+}
+
+export { ProductReviews };

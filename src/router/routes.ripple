@@ -3,6 +3,7 @@ import type { RouteProps } from 'ripple-router';
 import { Root } from 'src/components/root.ripple';
 import { Layout } from '~layout';
 import { Products } from '~products';
+import { ProductDescription, ProductReviews } from '~product';
 
 component ProductsPage({ searchParams }: RouteProps) {
   <Root>
@@ -12,10 +13,20 @@ component ProductsPage({ searchParams }: RouteProps) {
   </Root>
 }
 
-component ProductDescriptionPage({ searchParams }: RouteProps) {
+component ProductDescriptionPage({ searchParams, pathParams }: RouteProps<'/:productId'>) {
   <Root>
-    <Layout {searchParams}>{'Empty'}</Layout>
+    <Layout {searchParams}>
+      <ProductDescription productId={@pathParams.@productId} />
+    </Layout>
   </Root>
 }
 
-export { ProductsPage, ProductDescriptionPage };
+component ProductReviewsPage({ searchParams, pathParams }: RouteProps<'/:productId'>) {
+  <Root>
+    <Layout {searchParams}>
+      <ProductReviews productId={@pathParams.@productId} />
+    </Layout>
+  </Root>
+}
+
+export { ProductsPage, ProductDescriptionPage, ProductReviewsPage };
